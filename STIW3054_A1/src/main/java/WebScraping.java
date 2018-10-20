@@ -7,8 +7,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class WebScraping {
-    private ArrayList<Trivia> triviaArrayList = new ArrayList<Trivia>();
+    private final ArrayList<Trivia> triviaArrayList = new ArrayList<Trivia>();
 
+    /**
+     *  Extract Trivia Table from website
+     */
     public void extractTable() {
         String link = "https://ms.wikipedia.org/wiki/Malaysia";
         try {
@@ -23,11 +26,11 @@ public class WebScraping {
 
             for (int i = 0; i < tableRows.size(); i++) {
                 //Table Rows size : 24
-                String c1 = tableRows.get(i).select("th").text();
-                String c2 = tableRows.get(i).select("td").text();
+                String key = tableRows.get(i).select("th").text();
+                String value = tableRows.get(i).select("td").text();
                 //System.out.println("--------------- Record ---------------");
-                //System.out.println((i+1) + ". " + C1 + " : " + C2);
-                triviaArrayList.add(new Trivia(c1, c2));
+                //System.out.println((i+1) + ". " + key + " : " + value);
+                triviaArrayList.add(new Trivia(key, value));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -37,13 +40,13 @@ public class WebScraping {
     public void printArrayRecord() {
         int i = 1;
         System.out.println("--------------- Table ---------------");
-        for (Trivia t : triviaArrayList) {
-            System.out.println(i + ". " + t.getC1() + " : " + t.getC2());
+        for (Trivia trivia : triviaArrayList) {
+            System.out.println(i + ". " + trivia.getKey() + " : " + trivia.getValue());
             i++;
         }
     }
 
-    public ArrayList<Trivia> passArray() {
+    public ArrayList<Trivia> getTriviaArrayList() {
         return triviaArrayList;
     }
 

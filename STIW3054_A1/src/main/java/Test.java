@@ -8,6 +8,6 @@ public class Test {
 
         webScraping.extractTable();
         webScraping.printArrayRecord();
-        excel.writeExcel(webScraping.passArray());
+        excel.writeExcel(webScraping.getTriviaArrayList());
     }
 }
